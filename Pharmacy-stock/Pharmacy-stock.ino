@@ -5,17 +5,23 @@
 #include <Password.h>
 #include <Keypad.h>
 
-Password password = Password( "1234" );
+Password password = Password( "1" );
 
 #define SS_PIN1 49
 #define RST_PIN1 47
 #define SS_PIN2 45
 #define RST_PIN2 43
+#define SS_PIN3 41
+#define RST_PIN3 39
+#define SS_PIN4 37
+#define RST_PIN4 35
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 RFID rfid1(SS_PIN1, RST_PIN1);
 RFID rfid2(SS_PIN2, RST_PIN2);
+RFID rfid3(SS_PIN3, RST_PIN3);
+RFID rfid4(SS_PIN4, RST_PIN4);
 
 const byte ROWS = 4;
 const byte COLS = 4;
@@ -30,7 +36,9 @@ byte colPins[COLS] = {6, 5, 4, 3};
 
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
-int mode = 0, _lcdcolum = 16;
+byte mode = 0;
+int stock[5];
+byte _lcdcolum = 16;
 
 int serNum0;
 int serNum1;
@@ -45,6 +53,24 @@ void clearCard()  {
   rfid1.serNum[2] = 0;
   rfid1.serNum[3] = 0;
   rfid1.serNum[4] = 0;
+
+  rfid2.serNum[0] = 0;
+  rfid2.serNum[1] = 0;
+  rfid2.serNum[2] = 0;
+  rfid2.serNum[3] = 0;
+  rfid2.serNum[4] = 0;
+
+  rfid3.serNum[0] = 0;
+  rfid3.serNum[1] = 0;
+  rfid3.serNum[2] = 0;
+  rfid3.serNum[3] = 0;
+  rfid3.serNum[4] = 0;
+
+  rfid4.serNum[0] = 0;
+  rfid4.serNum[1] = 0;
+  rfid4.serNum[2] = 0;
+  rfid4.serNum[3] = 0;
+  rfid4.serNum[4] = 0;
 }
 
 /**   โหมดการทำงานทั้งหมด   **/
@@ -53,15 +79,13 @@ void keypadEvent(KeypadEvent eKey) {
     case PRESSED:
       Serial.print("Pressed: ");
       Serial.println(eKey);
-      lcd.setCursor(0, 3);
-      lcd.print("Insert password:");
       lcd.setCursor(_lcdcolum, 3);
       lcd.print(eKey);
       _lcdcolum++;
 
       switch (eKey) {
         case '*': checkPassword(); break;
-        case '#': password.reset(); break;
+        //        case '#': password.reset(); break;
         default: password.append(eKey);
       }
   }
@@ -102,6 +126,12 @@ void setup() {
   SPI.begin();
   rfid1.init();
   rfid2.init();
+  rfid3.init();
+  rfid4.init();
+  delay(1000);
+
+  // fix mode for debug
+  mode = 1;
 }
 
 void loop() {
@@ -112,7 +142,10 @@ void loop() {
     mainscreen();
   } else if (mode == 1)  {
     checkstock();
+  } else if (mode == 2)  {
+    printallstock();
   }
 }
+
 
 
