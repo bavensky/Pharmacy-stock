@@ -14,59 +14,59 @@ void printallstock()  {
 
 }
 
-// card 1 = 246   para
-// card 2 = 69    betagen
-// card 3 = 181   yakoo
-// card 4 = 229   milk
+// card 1 = 246   Paracetamol
+// card 2 = 69    Aspirin
+// card 3 = 181   Tincture
+// card 4 = 229   Alcohol
 
 void printslot1() {
   if (stock[0] == 246)  {
-    lcd.print("para");
+    lcd.print("Paracetamol");
   } else if (stock[0] == 69) {
-    lcd.print("betagen");
+    lcd.print("Aspirin");
   } else if (stock[0] == 181) {
-    lcd.print("yakoo");
+    lcd.print("Tincture");
   } else if (stock[0] == 229) {
-    lcd.print("milk");
+    lcd.print("Alcohol");
   } else {
     lcd.print(" - ");
   }
 }
 void printslot2() {
   if (stock[1] == 246)  {
-    lcd.print("para");
+    lcd.print("Paracetamolara");
   } else if (stock[1] == 69) {
-    lcd.print("betagen");
+    lcd.print("Aspirin");
   } else if (stock[1] == 181) {
-    lcd.print("yakoo");
+    lcd.print("Tincture");
   } else if (stock[1] == 229) {
-    lcd.print("milk");
+    lcd.print("Alcohol");
   } else {
     lcd.print(" - ");
   }
 }
 void printslot3() {
   if (stock[2] == 246)  {
-    lcd.print("para");
+    lcd.print("Paracetamol");
   } else if (stock[2] == 69) {
-    lcd.print("betagen");
+    lcd.print("Aspirin");
   } else if (stock[2] == 181) {
-    lcd.print("yakoo");
+    lcd.print("Tincture");
   } else if (stock[2] == 229) {
-    lcd.print("milk");
+    lcd.print("Alcohol");
   } else {
     lcd.print(" - ");
   }
 }
 void printslot4() {
   if (stock[3] == 246)  {
-    lcd.print("para");
+    lcd.print("Paracetamol");
   } else if (stock[3] == 69) {
-    lcd.print("betagen");
+    lcd.print("Aspirin");
   } else if (stock[3] == 181) {
-    lcd.print("yakoo");
+    lcd.print("Tincture");
   } else if (stock[3] == 229) {
-    lcd.print("milk");
+    lcd.print("Alcohol");
   } else {
     lcd.print(" - ");
   }
